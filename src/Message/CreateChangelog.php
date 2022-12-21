@@ -2,15 +2,15 @@
 
 namespace Sofyco\Bundle\Doctrine\MongoDB\ChangelogBundle\Message;
 
-final class CreateChangelog
+final readonly class CreateChangelog
 {
     public function __construct(
-        public readonly ?string $userIdentifier,
-        public readonly string  $documentClassName,
-        public readonly string  $documentId,
-        public readonly string  $fieldName,
-        public readonly mixed   $oldValue,
-        public readonly mixed   $newValue,
+        public ?string $userIdentifier,
+        public string  $documentClassName,
+        public string  $documentId,
+        public string  $fieldName,
+        public mixed   $oldValue,
+        public mixed   $newValue,
     )
     {
     }

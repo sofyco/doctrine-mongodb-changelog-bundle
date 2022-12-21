@@ -8,14 +8,14 @@ use Doctrine\ODM\MongoDB\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Sofyco\Bundle\Doctrine\MongoDB\ChangelogBundle\Document\Changelog\LoggableInterface;
 use Sofyco\Bundle\Doctrine\MongoDB\ChangelogBundle\Message;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Security\Core\Security;
 
 #[AsDocumentListener(event: Events::preUpdate, method: Events::preUpdate)]
 #[AsDocumentListener(event: Events::preRemove, method: Events::preRemove)]
-final class DocumentChangelogListener
+final readonly class DocumentChangelogListener
 {
-    public function __construct(private readonly DocumentManager $dm, private readonly MessageBusInterface $messageBus, private readonly Security $security)
+    public function __construct(private DocumentManager $dm, private MessageBusInterface $messageBus, private Security $security)
     {
     }
 
