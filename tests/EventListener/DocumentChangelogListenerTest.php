@@ -74,7 +74,7 @@ final class DocumentChangelogListenerTest extends KernelTestCase
         self::getDocumentManager()->flush();
 
         $messages = [
-            new DeleteChangelog(document: $product),
+            new DeleteChangelog(documentClassName: $product::class, documentId: $product->getId()),
         ];
 
         self::assertEquals($messages, MessageStore::$messages);

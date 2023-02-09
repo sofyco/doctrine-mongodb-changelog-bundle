@@ -53,7 +53,7 @@ final readonly class DocumentChangelogListener
             return;
         }
 
-        $message = new Message\DeleteChangelog(document: $document);
+        $message = new Message\DeleteChangelog(documentClassName: $document::class, documentId: $document->getId());
 
         $this->messageBus->dispatch($message);
     }

@@ -2,11 +2,9 @@
 
 namespace Sofyco\Bundle\Doctrine\MongoDB\ChangelogBundle\Message;
 
-use Sofyco\Bundle\Doctrine\MongoDB\ChangelogBundle\Document\Changelog\LoggableInterface;
-
 final readonly class DeleteChangelog
 {
-    public function __construct(public LoggableInterface $document)
+    public function __construct(public string $documentClassName, public string $documentId)
     {
     }
 }
