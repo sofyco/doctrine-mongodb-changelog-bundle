@@ -19,6 +19,38 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     protected function configureContainer(ContainerConfigurator $container): void
     {
-        $container->import('config/config.yaml');
+        $container->extension('framework', ['test' => true]);
+
+        $container->extension('doctrine_mongodb', [
+            'connections' => [
+                'default' => [
+                    'server' => '%env(resolve:MONGODB_URL)%',
+                ],
+            ],
+            'default_database' => 'test_database',
+            'document_managers' => [
+                'default' => [
+                    'auto_mapping' => true,
+                    'mappings' => [
+                        'Document' => [
+                            'type' => 'attribute',
+                            'dir' => __DIR__ . '/Document',
+                            'prefix' => __NAMESPACE__ . '\\Document',
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $container->extension('security', [
+            'firewalls' => [
+                'main' => [],
+            ],
+        ]);
+
+        $container
+            ->services()
+            ->load(__NAMESPACE__ . '\MessageHandler\\', __DIR__ . '/MessageHandler')
+            ->autoconfigure();
     }
 }
