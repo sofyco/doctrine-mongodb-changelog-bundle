@@ -35,7 +35,7 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
                         'Document' => [
                             'type' => 'attribute',
                             'dir' => __DIR__ . '/Document',
-                            'prefix' => __NAMESPACE__ . '\\Document',
+                            'prefix' => __NAMESPACE__ . '\Document',
                         ],
                     ],
                 ],
