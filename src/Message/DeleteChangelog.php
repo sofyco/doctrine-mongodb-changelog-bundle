@@ -4,7 +4,16 @@ namespace Sofyco\Bundle\Doctrine\MongoDB\ChangelogBundle\Message;
 
 final readonly class DeleteChangelog
 {
-    public function __construct(public string $documentClassName, public string $documentId)
+    /**
+     * @var class-string
+     */
+    public string $documentClassName;
+
+    public string $documentId;
+
+    public function __construct(string $documentClassName, string $documentId)
     {
+        $this->documentClassName = $documentClassName;
+        $this->documentId = $documentId;
     }
 }
