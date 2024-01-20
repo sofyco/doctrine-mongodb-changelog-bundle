@@ -2,7 +2,11 @@
 
 namespace Sofyco\Bundle\Doctrine\MongoDB\ChangelogBundle\Tests\App;
 
+use Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle;
+use Sofyco\Bundle\Doctrine\MongoDB\ChangelogBundle\ChangelogBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 final class Kernel extends \Symfony\Component\HttpKernel\Kernel
@@ -11,10 +15,10 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     public function registerBundles(): iterable
     {
-        yield new \Symfony\Bundle\FrameworkBundle\FrameworkBundle();
-        yield new \Symfony\Bundle\SecurityBundle\SecurityBundle();
-        yield new \Doctrine\Bundle\MongoDBBundle\DoctrineMongoDBBundle();
-        yield new \Sofyco\Bundle\Doctrine\MongoDB\ChangelogBundle\ChangelogBundle();
+        yield new FrameworkBundle();
+        yield new SecurityBundle();
+        yield new DoctrineMongoDBBundle();
+        yield new ChangelogBundle();
     }
 
     protected function configureContainer(ContainerConfigurator $container): void

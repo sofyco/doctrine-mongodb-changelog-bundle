@@ -11,8 +11,8 @@ use Sofyco\Bundle\Doctrine\MongoDB\ChangelogBundle\Message;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-#[AsDocumentListener(event: Events::preUpdate, method: Events::preUpdate)]
-#[AsDocumentListener(event: Events::preRemove, method: Events::preRemove)]
+#[AsDocumentListener(event: Events::preUpdate)]
+#[AsDocumentListener(event: Events::preRemove)]
 final readonly class DocumentChangelogListener
 {
     public function __construct(private DocumentManager $dm, private MessageBusInterface $messageBus, private Security $security)
