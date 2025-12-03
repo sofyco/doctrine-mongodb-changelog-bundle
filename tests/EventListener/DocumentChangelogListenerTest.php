@@ -22,6 +22,13 @@ final class DocumentChangelogListenerTest extends KernelTestCase
         self::getDocumentManager()->flush();
     }
 
+    protected function tearDown(): void
+    {
+        self::ensureKernelShutdown();
+
+        restore_exception_handler();
+    }
+
     public function testChangedLoggableField(): void
     {
         $sku = '0000-0000';
