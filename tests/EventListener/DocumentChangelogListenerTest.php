@@ -24,7 +24,7 @@ final class DocumentChangelogListenerTest extends KernelTestCase
 
     protected function tearDown(): void
     {
-        self::ensureKernelShutdown();
+        parent::tearDown();
 
         restore_exception_handler();
     }
