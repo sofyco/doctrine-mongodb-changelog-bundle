@@ -27,14 +27,20 @@ final readonly class DocumentChangelogListener
             return;
         }
 
+        $documentId = $this->dm->getClassMetadata($document::class)->getIdentifierValue($document);
+
+        if (false === is_string($documentId)) {
+            return;
+        }
+
         foreach ($this->dm->getUnitOfWork()->getDocumentChangeSet($args->getObject()) as $fieldName => $set) {
-            if (\in_array($fieldName, $document->getLoggableFields(), true)) {
+            if (in_array($fieldName, $document->getLoggableFields(), true)) {
                 [$oldValue, $newValue] = $set;
 
                 $message = new Message\CreateChangelog(
                     userIdentifier: $this->security->getUser()?->getUserIdentifier(),
                     documentClassName: $document::class,
-                    documentId: $document->getId(),
+                    documentId: $documentId,
                     fieldName: $fieldName,
                     oldValue: $oldValue,
                     newValue: $newValue,
@@ -53,7 +59,16 @@ final readonly class DocumentChangelogListener
             return;
         }
 
-        $message = new Message\DeleteChangelog(documentClassName: $document::class, documentId: $document->getId());
+        $documentId = $this->dm->getClassMetadata($document::class)->getIdentifierValue($document);
+
+        if (false === is_string($documentId)) {
+            return;
+        }
+
+        $message = new Message\DeleteChangelog(
+            documentClassName: $document::class,
+            documentId: $documentId,
+        );
 
         $this->messageBus->dispatch($message);
     }

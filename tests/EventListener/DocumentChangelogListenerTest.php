@@ -41,7 +41,7 @@ final class DocumentChangelogListenerTest extends KernelTestCase
             new CreateChangelog(
                 userIdentifier: null,
                 documentClassName: Product::class,
-                documentId: $product->getId(),
+                documentId: $product->id,
                 fieldName: 'sku',
                 oldValue: $sku,
                 newValue: $product->sku,
@@ -81,7 +81,7 @@ final class DocumentChangelogListenerTest extends KernelTestCase
         self::getDocumentManager()->flush();
 
         $messages = [
-            new DeleteChangelog(documentClassName: $product::class, documentId: $product->getId()),
+            new DeleteChangelog(documentClassName: $product::class, documentId: $product->id),
         ];
 
         self::assertEquals($messages, MessageStore::$messages);

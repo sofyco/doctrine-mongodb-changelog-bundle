@@ -23,11 +23,6 @@ final class Product implements LoggableInterface
         $this->name = $name;
     }
 
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
     public function getLoggableFields(): array
     {
         return ['sku'];
